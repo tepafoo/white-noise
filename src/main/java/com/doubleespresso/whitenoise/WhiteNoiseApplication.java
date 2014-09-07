@@ -5,8 +5,13 @@ import com.doubleespresso.whitenoise.resources.WhiteNoiseResource;
 import io.dropwizard.Application;
 import io.dropwizard.setup.Bootstrap;
 import io.dropwizard.setup.Environment;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class WhiteNoiseApplication extends Application<WhiteNoiseConfiguration> {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(WhiteNoiseApplication.class);
+
     public static void main(String[] args) throws Exception {
         new WhiteNoiseApplication().run(args);
     }
@@ -18,6 +23,7 @@ public class WhiteNoiseApplication extends Application<WhiteNoiseConfiguration> 
 
     @Override
     public void initialize(Bootstrap<WhiteNoiseConfiguration> bootstrap) {
+        LOGGER.debug("Application initialised!");
         // nothing to do yet
     }
 
@@ -28,5 +34,7 @@ public class WhiteNoiseApplication extends Application<WhiteNoiseConfiguration> 
                 new TemplateHealthCheck(configuration.getTemplate());
         environment.healthChecks().register("template", healthCheck);
         environment.jersey().register(resource);
+
+        LOGGER.info("Application running!");
     }
 }
