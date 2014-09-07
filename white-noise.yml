@@ -39,15 +39,26 @@ server:
 logging:
 
   # The default level of all loggers. Can be OFF, ERROR, WARN, INFO, DEBUG, TRACE, or ALL.
-  level: INFO
+  level: ALL
 
   # Logger-specific levels.
   loggers:
-
-    # Sets the level for 'com.example.app' to DEBUG.
-    com.example.app: DEBUG
 
     org.hibernate.SQL: ALL
 
   appenders:
     - type: console
+    - type: gelf
+      # facility: MyApplication
+      # threshold: ALL
+      host: 127.0.0.1
+      # port: 12201
+      # useLoggerName: true
+      # useThreadName: true
+      # useMarker: false
+      # serverVersion: 0.9.6
+      # chunkThreshold: 1000
+      # messagePattern: %m%rEx
+      # shortMessagePattern: %.-100(%m%rEx)
+      # hostName: hostname
+      includeFullMDC: true
